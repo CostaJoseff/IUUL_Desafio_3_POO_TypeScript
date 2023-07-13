@@ -3,6 +3,7 @@ import { Debito } from "./Debito.js";
 
 export abstract class AConta {
   private numero: string;
+  private proprietario: string;
   private saldo: number;
   private depositos: Credito[];
   private saques: Debito[];
@@ -10,6 +11,8 @@ export abstract class AConta {
   constructor(numero: string) {
     this.numero = numero;
     this.saldo = 0;
+    this.depositos = [];
+    this.saques = [];
   }
 
   public depositar(valor: number) {
@@ -32,6 +35,10 @@ export abstract class AConta {
 
   public getSaldo() {
     return this.saldo;
+  }
+
+  public getProprietario() {
+    return this.proprietario;
   }
 
   public calcularSaldo() {

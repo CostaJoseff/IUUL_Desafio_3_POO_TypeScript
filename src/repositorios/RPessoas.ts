@@ -1,14 +1,24 @@
 import { APessoa } from "../pessoa/APessoa";
+import { Funcionario } from "../pessoa/Funcionario";
+import { Cliente } from "../pessoa/Cliente";
 
 export class RPessoas {
   private pessoas: Map<string, APessoa>;
 
-  public setPessoa(APessoa) {
-    this.pessoas.set(APessoa.getCPF(), APessoa);
+  constructor() {
+    this.pessoas = new Map<string, APessoa>();
   }
 
-  public getPessoa(cpf: string) {
-    return this.pessoas.get(cpf);
+  public setCliente(cliente: Cliente) {
+    this.pessoas.set(cliente.getCpf(), cliente);
+  }
+
+  public setFuncionario(funcionario: Funcionario) {
+    this.pessoas.set(funcionario.getCodFuncionario(), funcionario)
+  }
+
+  public getPessoa(id: string) {
+    return this.pessoas.get(id);
   }
 
   public getPessoas() {

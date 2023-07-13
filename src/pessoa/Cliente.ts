@@ -2,7 +2,7 @@ import { APessoa } from "./APessoa.js";
 import { Endereco } from "./Endereco.js";
 import { IUsuario } from "../interfaces/IUsuario";
 
-class Cliente extends APessoa implements IUsuario {
+export class Cliente extends APessoa implements IUsuario {
   private vip: boolean;
   private enderecos: Endereco[];
   private senha: string;
@@ -34,6 +34,10 @@ class Cliente extends APessoa implements IUsuario {
 
   public autenticar(dados: string[]) {
     return super.getCpf() == dados[0] && this.senha == dados[1];
+  }
+
+  public adicionarEndereco(novoEndereco: Endereco) {
+    this.enderecos.push(novoEndereco);
   }
 
 }

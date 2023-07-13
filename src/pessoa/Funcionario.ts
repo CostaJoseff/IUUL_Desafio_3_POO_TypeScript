@@ -2,7 +2,7 @@ import { APessoa } from "./APessoa";
 import { Cargo } from "./Cargo";
 import { IUsuario } from "../interfaces/IUsuario";
 
-class Funcionario extends APessoa implements IUsuario {
+export class Funcionario extends APessoa implements IUsuario {
   private salario: number;
   private cargo: Cargo;
   private codFuncionario: string;
@@ -18,5 +18,9 @@ class Funcionario extends APessoa implements IUsuario {
 
   public autenticar(dados: string[]) {
     return this.codFuncionario == dados[0] && this.senha == dados[1];
+  }
+
+  public getCodFuncionario() {
+    return this.codFuncionario;
   }
 }

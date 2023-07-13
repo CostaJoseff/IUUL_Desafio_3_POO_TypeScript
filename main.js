@@ -1,0 +1,17 @@
+"use strict";
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
+var ContaCorrente_1 = require("./src/conta/ContaCorrente");
+var ContaPoupanca_1 = require("./src/conta/ContaPoupanca");
+var coiso;
+var contas;
+contas = new Map();
+console.log(contas);
+coiso = new ContaPoupanca_1.ContaPoupanca("ww");
+contas.set("ww", coiso);
+console.log(contas.get("ww"));
+var coiso2;
+coiso2 = new ContaCorrente_1.ContaCorrente("we", 10);
+contas.set("we", coiso2);
+console.log(contas.get("we"));
+console.log((_a = contas.get("we")) === null || _a === void 0 ? void 0 : _a.constructor.name);

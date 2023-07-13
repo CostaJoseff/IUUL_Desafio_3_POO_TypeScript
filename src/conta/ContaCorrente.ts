@@ -1,4 +1,6 @@
-class ContaCorrente extends AConta{
+import { AConta } from "./AConta";
+
+export class ContaCorrente extends AConta{
   private limite: number;
 
   constructor(numero: string, limite: number) {
@@ -18,6 +20,10 @@ class ContaCorrente extends AConta{
     super.sacar(valor);
     contaDestino.depositar(valor);
 
+  }
+
+  public getClass() {
+    return "ContaCorrente";
   }
 
 }
