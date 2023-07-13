@@ -1,0 +1,54 @@
+import { Credito } from "./Credito.js";
+import { Debito } from "./Debito.js";
+
+export abstract class AConta {
+  private numero: string;
+  private saldo: number;
+  private depositos: Credito[];
+  private saques: Debito[];
+
+  constructor(numero: string) {
+    this.numero = numero;
+    this.saldo = 0;
+  }
+
+  public depositar(valor: number) {
+    this.depositos.push(new Credito(valor, new Date()));
+    this.saldo += valor;
+  }
+
+  public sacar(valor: number) {
+    if (this.saldo < valor) {
+      throw new Error("Saldo insuficiente");
+      
+    }
+    this.saques.push(new Debito(valor, new Date()));
+    this.saldo -= valor;
+  }
+
+  public getNumero() {
+    return this.numero;
+  }
+
+  public getSaldo() {
+    return this.saldo;
+  }
+
+  public calcularSaldo() {
+    let saldo: number = 0;
+
+    for (let i = 0; i < this.depositos.length; i++) {
+      saldo += this.depositos[i].getValor();
+    }
+    for (let i = 0; i < this.saques.length; i++) {
+      saldo -= this.saques[i].getValor();
+    }
+
+    if (saldo != this.saldo) {
+      throw new Error("Soma de saldo diverge do saldo armazenado.");
+    }
+
+    return saldo;
+  }
+
+}
