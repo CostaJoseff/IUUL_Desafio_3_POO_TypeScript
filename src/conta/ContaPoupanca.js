@@ -19,14 +19,19 @@ exports.ContaPoupanca = void 0;
 var AConta_1 = require("./AConta");
 var ContaPoupanca = /** @class */ (function (_super) {
     __extends(ContaPoupanca, _super);
-    function ContaPoupanca(numero) {
-        return _super.call(this, numero) || this;
+    function ContaPoupanca(numero, proprietario) {
+        return _super.call(this, numero, proprietario) || this;
     }
     ContaPoupanca.prototype.calcularSaldo = function () {
         return _super.prototype.calcularSaldo.call(this);
     };
     ContaPoupanca.prototype.getClass = function () {
         return "ContaPoupanca";
+    };
+    ContaPoupanca.prototype.toString = function () {
+        return "Numero da Conta: " + _super.prototype.getNumero.call(this) + "\n"
+            + "Proprietário da Conta: " + _super.prototype.getProprietario.call(this) + "\n"
+            + "Saldo: " + _super.prototype.getSaldo.call(this);
     };
     return ContaPoupanca;
 }(AConta_1.AConta));

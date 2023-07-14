@@ -15,6 +15,8 @@ export class Endereco {
     this.uf = uf;
   }
 
-
+  public toString() {
+    return `CEP: ${this.cep}\nLogadouro: ${this.logadouro} - N° ${this.numero}\nComplemento: ${this.complemento}\nCidade: ${this.cidade} - ${this.uf};`
+  }
   
 }

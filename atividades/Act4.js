@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Banco_1 = require("../src/Banco");
+var banco = new Banco_1.Banco();
+banco.cadastrarCliente("111", "Corredor", "3321", "405504", "ali", "0", "nenhum", "aquela", "ZZ", "eusoulegal");
+var numContaCorrent = banco.criarContaCorrente(500, "111");
+banco.cadastrarCliente("222", "Popo", "3133123", "234234234", "dfdsfg", "1", "sdfsdf", "sdfsdfsf", "WW", "eusoulegal");
+var numContaPoup = banco.criarContaPoupanca("222");
+banco.depositar(1000, numContaCorrent);
+banco.depositar(1000, numContaPoup);
+banco.transferir(numContaCorrent, numContaPoup, 500);
+console.log(banco.exibirConta(numContaCorrent) + "\n\n");
+console.log(banco.exibirConta(numContaPoup) + "\n\n");

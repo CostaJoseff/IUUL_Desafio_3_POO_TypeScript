@@ -12,34 +12,40 @@ export class SConta {
     this.contas = new RContas();
   }
 
-  public criarContaCorrente(limite: number) {
-    let contaCorrente = new ContaCorrente(`${this.numeroDeContaDisponivel}`, limite);
+  public criarContaCorrente(limite: number, proprietario: string) {
+    let contaCorrente = new ContaCorrente(`${this.numeroDeContaDisponivel}`, limite, proprietario);
     this.contas.setConta(contaCorrente);
     this.numeroDeContaDisponivel++;
+
+    return contaCorrente.getNumero();
   }
 
-  public criarContaPoupanca() {
-    let contaPoupanca = new ContaPoupanca(`${this.numeroDeContaDisponivel}`);
+  public criarContaPoupanca(proprietario: string) {
+    let contaPoupanca = new ContaPoupanca(`${this.numeroDeContaDisponivel}`, proprietario);
     this.contas.setConta(contaPoupanca);
     this.numeroDeContaDisponivel++;
+
+    return contaPoupanca.getNumero();
   }
 
   public calcularSaldo(numero: string) {
-    return this.contas.getConta(numero)?.calcularSaldo;
+    return this.contas.getConta(numero)?.calcularSaldo();
   }
 
-  public depositar(numero: string, valor: number) {
+  public depositar(valor: number, numero: string) {
     this.contas.getConta(numero)?.depositar(valor);
   }
 
-  public sacar(numero: string, valor: number) {
+  public sacar(valor: number, numero: string) {
     this.contas.getConta(numero)?.sacar(valor);
   }
 
   public transferir(contaOrigem: string, contaDestino: string, valor: number) {
-    try {
-      (<ContaCorrente> this.contas.getConta(contaOrigem))?.transferir(<AConta> this.contas.getConta(contaDestino), valor);
-    } catch (erro) {return null;}
+  (<ContaCorrente> this.contas.getConta(contaOrigem))?.transferir(<AConta> this.contas.getConta(contaDestino), valor);
+  }
+
+  public exibirConta(numero: string) {
+    return (<AConta> this.contas.getConta(numero))?.toString();
   }
 
 }

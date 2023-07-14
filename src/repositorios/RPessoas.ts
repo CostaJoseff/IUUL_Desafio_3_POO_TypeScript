@@ -14,7 +14,7 @@ export class RPessoas {
   }
 
   public setFuncionario(funcionario: Funcionario) {
-    this.pessoas.set(funcionario.getCodFuncionario(), funcionario)
+    this.pessoas.set(funcionario.getCodFuncionario(), funcionario);
   }
 
   public getPessoa(id: string) {

@@ -23,4 +23,8 @@ export class Funcionario extends APessoa implements IUsuario {
   public getCodFuncionario() {
     return this.codFuncionario;
   }
+
+  public toString() {
+    return `Codigo do Funcionário: ${this.codFuncionario}\nNome: ${super.getNome()}\nCargo: ${this.cargo.getCargo()}`;
+  }
 }

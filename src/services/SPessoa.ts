@@ -12,6 +12,7 @@ export class SPessoa {
 
   constructor() {
     this.pessoas = new RPessoas();
+    this.cargos = new RCargos();
     this.codFuncionarioDisponivel = 0;
   }
 
@@ -22,18 +23,29 @@ export class SPessoa {
   }
 
   public cadastrarFuncionario(cpf: string, nome: string, telefone: string, cargoNome: string, salario: number, senha: string) {
+    
     if (!this.cargos.existe(cargoNome)) {
       this.cargos.setCargo(new Cargo(cargoNome));
     }
 
     let novoFuncionario = new Funcionario(cpf, nome, telefone, <Cargo> this.cargos.getCargo(cargoNome), salario, `${this.codFuncionarioDisponivel}`, senha);
+    
     this.pessoas.setFuncionario(novoFuncionario);
     this.codFuncionarioDisponivel++;
+    return novoFuncionario.getCodFuncionario();
   }
 
   public adicionarEndereco(cpf: string, cep: string, logadouro: string, numero: string, complemento: string, cidade: string, uf: string) {
     let novoEndereco = new Endereco(cep, logadouro, numero, complemento, cidade, uf);
     (<Cliente> this.pessoas.getPessoa(cpf)).adicionarEndereco(novoEndereco);
+  }
+
+  public listarEnderecos(cpf: string) {
+    return (<Cliente> this.pessoas.getPessoa(cpf)).listarEndereços();
+  }
+
+  public exibirFuncionario(codFuncionario: string) {
+    return (<Funcionario> this.pessoas.getPessoa(codFuncionario)).toString();
   }
 
 }

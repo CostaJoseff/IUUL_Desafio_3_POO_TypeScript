@@ -19,8 +19,8 @@ exports.ContaCorrente = void 0;
 var AConta_1 = require("./AConta");
 var ContaCorrente = /** @class */ (function (_super) {
     __extends(ContaCorrente, _super);
-    function ContaCorrente(numero, limite) {
-        var _this = _super.call(this, numero) || this;
+    function ContaCorrente(numero, limite, proprietario) {
+        var _this = _super.call(this, numero, proprietario) || this;
         _this.limite = limite;
         return _this;
     }
@@ -36,6 +36,12 @@ var ContaCorrente = /** @class */ (function (_super) {
     };
     ContaCorrente.prototype.getClass = function () {
         return "ContaCorrente";
+    };
+    ContaCorrente.prototype.toString = function () {
+        return "Numero da Conta: " + _super.prototype.getNumero.call(this) + "\n"
+            + "Proprietário da Conta: " + _super.prototype.getProprietario.call(this) + "\n"
+            + "Saldo: R$" + _super.prototype.getSaldo.call(this) + " - Limite: R$" + this.limite + "\n"
+            + "Total: R$" + (_super.prototype.getSaldo.call(this) + this.limite);
     };
     return ContaCorrente;
 }(AConta_1.AConta));

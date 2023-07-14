@@ -8,11 +8,12 @@ export abstract class AConta {
   private depositos: Credito[];
   private saques: Debito[];
 
-  constructor(numero: string) {
+  constructor(numero: string, proprietario: string) {
     this.numero = numero;
     this.saldo = 0;
     this.depositos = [];
     this.saques = [];
+    this.proprietario = proprietario;
   }
 
   public depositar(valor: number) {

@@ -12,4 +12,8 @@ export abstract class APessoa {
   public getCpf() {
     return this.cpf;
   }
+
+  public getNome() {
+    return this.nome;
+  }
 }

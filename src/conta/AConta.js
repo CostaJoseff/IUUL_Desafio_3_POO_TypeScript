@@ -4,11 +4,12 @@ exports.AConta = void 0;
 var Credito_js_1 = require("./Credito.js");
 var Debito_js_1 = require("./Debito.js");
 var AConta = /** @class */ (function () {
-    function AConta(numero) {
+    function AConta(numero, proprietario) {
         this.numero = numero;
         this.saldo = 0;
         this.depositos = [];
         this.saques = [];
+        this.proprietario = proprietario;
     }
     AConta.prototype.depositar = function (valor) {
         this.depositos.push(new Credito_js_1.Credito(valor, new Date()));

@@ -1,5 +1,5 @@
-import { APessoa } from "./APessoa.js";
-import { Endereco } from "./Endereco.js";
+import { APessoa } from "./APessoa";
+import { Endereco } from "./Endereco";
 import { IUsuario } from "../interfaces/IUsuario";
 
 export class Cliente extends APessoa implements IUsuario {
@@ -11,6 +11,7 @@ export class Cliente extends APessoa implements IUsuario {
     super(cpf, nome, telefone);
     this.vip = false;
     this.senha = senha;
+    this.enderecos = [];
     this.enderecos.push(endereco);
   }
 
@@ -38,6 +39,12 @@ export class Cliente extends APessoa implements IUsuario {
 
   public adicionarEndereco(novoEndereco: Endereco) {
     this.enderecos.push(novoEndereco);
+  }
+
+  public toString() {
+    return `CPF: ${super.getCpf()}
+    Nome: ${super.getNome()}
+    VIP: ${this.vip}`;
   }
 
 }
