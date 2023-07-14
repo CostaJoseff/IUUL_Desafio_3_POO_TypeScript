@@ -15,7 +15,7 @@ export class RCargos {
     return this.cargos.get(nome);
   }
 
-  public existe(nome: string) {
+  public contem(nome: string) {
     return this.cargos.get(nome) != undefined;
   }
 

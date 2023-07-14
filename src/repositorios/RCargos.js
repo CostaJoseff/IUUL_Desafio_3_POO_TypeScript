@@ -11,7 +11,7 @@ var RCargos = /** @class */ (function () {
     RCargos.prototype.getCargo = function (nome) {
         return this.cargos.get(nome);
     };
-    RCargos.prototype.existe = function (nome) {
+    RCargos.prototype.contem = function (nome) {
         return this.cargos.get(nome) != undefined;
     };
     return RCargos;

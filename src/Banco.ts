@@ -19,27 +19,19 @@ export class Banco {
   }
 
   public adicionarEndereco(cpf: string, cep: string, logadouro: string, numero: string, complemento: string, cidade: string, uf: string) {
-    try {
       this.sPessoa.adicionarEndereco(cpf, cep, logadouro, numero, complemento, cidade, uf);
-    } catch (error) {return null;}
   }
 
   public listarEnderecos(cpf: string) {
-    try {
       return this.sPessoa.listarEnderecos(cpf);
-    } catch (error) {return null;}
   }
 
   public exibirFuncionario(id: string) {
-    try {
       return this.sPessoa.exibirFuncionario(id);
-    } catch (error) {return null;}
   }
 
   public criarContaCorrente(limite: number, proprietario: string) {
-    try {
       return this.sConta.criarContaCorrente(limite, proprietario); 
-    } catch (error) {return null;}
   }
 
   public criarContaPoupanca(proprietario: string) {
@@ -47,9 +39,7 @@ export class Banco {
   }
 
   public exibirConta(numero: string) {
-    try {
       return this.sConta.exibirConta(numero);
-    } catch (error) {return null;}
   }
 
   public depositar(valor: number, numero: string) {

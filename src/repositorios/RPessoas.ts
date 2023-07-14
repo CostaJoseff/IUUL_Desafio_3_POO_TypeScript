@@ -25,4 +25,19 @@ export class RPessoas {
     return this.pessoas.values();
   }
 
+  public contem(id: string) {
+    return this.getPessoa(id) != undefined && this.getPessoa(id) != null;
+  }
+
+  public contemFuncionario(cpf: string) {
+    
+    for (let valor of Array.from(this.pessoas.values())) {
+      if (valor.getCpf() == cpf) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
 }

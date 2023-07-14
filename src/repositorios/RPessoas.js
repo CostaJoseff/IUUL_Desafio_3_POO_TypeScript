@@ -17,6 +17,18 @@ var RPessoas = /** @class */ (function () {
     RPessoas.prototype.getPessoas = function () {
         return this.pessoas.values();
     };
+    RPessoas.prototype.contem = function (id) {
+        return this.getPessoa(id) != undefined && this.getPessoa(id) != null;
+    };
+    RPessoas.prototype.contemFuncionario = function (cpf) {
+        for (var _i = 0, _a = Array.from(this.pessoas.values()); _i < _a.length; _i++) {
+            var valor = _a[_i];
+            if (valor.getCpf() == cpf) {
+                return true;
+            }
+        }
+        return false;
+    };
     return RPessoas;
 }());
 exports.RPessoas = RPessoas;

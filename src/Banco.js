@@ -15,47 +15,22 @@ var Banco = /** @class */ (function () {
         return this.sPessoa.cadastrarFuncionario(cpf, nome, telefone, cargoNome, salario, senha);
     };
     Banco.prototype.adicionarEndereco = function (cpf, cep, logadouro, numero, complemento, cidade, uf) {
-        try {
-            this.sPessoa.adicionarEndereco(cpf, cep, logadouro, numero, complemento, cidade, uf);
-        }
-        catch (error) {
-            return null;
-        }
+        this.sPessoa.adicionarEndereco(cpf, cep, logadouro, numero, complemento, cidade, uf);
     };
     Banco.prototype.listarEnderecos = function (cpf) {
-        try {
-            return this.sPessoa.listarEnderecos(cpf);
-        }
-        catch (error) {
-            return null;
-        }
+        return this.sPessoa.listarEnderecos(cpf);
     };
     Banco.prototype.exibirFuncionario = function (id) {
-        try {
-            return this.sPessoa.exibirFuncionario(id);
-        }
-        catch (error) {
-            return null;
-        }
+        return this.sPessoa.exibirFuncionario(id);
     };
     Banco.prototype.criarContaCorrente = function (limite, proprietario) {
-        try {
-            return this.sConta.criarContaCorrente(limite, proprietario);
-        }
-        catch (error) {
-            return null;
-        }
+        return this.sConta.criarContaCorrente(limite, proprietario);
     };
     Banco.prototype.criarContaPoupanca = function (proprietario) {
         return this.sConta.criarContaPoupanca(proprietario);
     };
     Banco.prototype.exibirConta = function (numero) {
-        try {
-            return this.sConta.exibirConta(numero);
-        }
-        catch (error) {
-            return null;
-        }
+        return this.sConta.exibirConta(numero);
     };
     Banco.prototype.depositar = function (valor, numero) {
         this.sConta.depositar(valor, numero);
