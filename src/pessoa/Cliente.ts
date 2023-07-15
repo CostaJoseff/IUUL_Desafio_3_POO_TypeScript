@@ -38,6 +38,12 @@ export class Cliente extends APessoa implements IUsuario {
   }
 
   public adicionarEndereco(novoEndereco: Endereco) {
+    this.enderecos.forEach((endereco) => {
+      if (endereco.equals(novoEndereco)) {
+        throw new Error("Endereço já existe");
+      }
+    });
+
     this.enderecos.push(novoEndereco);
   }
 

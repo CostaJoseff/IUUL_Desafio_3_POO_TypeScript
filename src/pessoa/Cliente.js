@@ -44,6 +44,11 @@ var Cliente = /** @class */ (function (_super) {
         return _super.prototype.getCpf.call(this) == dados[0] && this.senha == dados[1];
     };
     Cliente.prototype.adicionarEndereco = function (novoEndereco) {
+        this.enderecos.forEach(function (endereco) {
+            if (endereco.equals(novoEndereco)) {
+                throw new Error("Endereço já existe");
+            }
+        });
         this.enderecos.push(novoEndereco);
     };
     Cliente.prototype.toString = function () {

@@ -17,6 +17,8 @@ export class SPessoa {
   }
 
   public cadastrarCliente(cpf: string, nome: string, telefone: string, cep: string, logadouro: string, numero: string, complemento: string, cidade: string, uf: string, senha:string) {
+    this.validarStrings([cpf, nome, telefone, cep, logadouro, numero, complemento, cidade, uf, senha]);
+
     if (this.Rpessoas.contem(cpf)) {
       throw new Error("CPF já cadastrado");
     }
@@ -27,6 +29,11 @@ export class SPessoa {
   }
 
   public cadastrarFuncionario(cpf: string, nome: string, telefone: string, cargoNome: string, salario: number, senha: string) {
+    this.validarStrings([cpf, nome, telefone, cargoNome, senha]);
+    if (salario <=0) {
+      throw new Error("Salário não pode ser <= 0");
+    }
+
     if (this.Rpessoas.contemFuncionario(cpf)) {
       throw new Error("Funcionário já cadastrado");
     }
@@ -43,6 +50,8 @@ export class SPessoa {
   }
 
   public adicionarEndereco(cpf: string, cep: string, logadouro: string, numero: string, complemento: string, cidade: string, uf: string) {
+    this.validarStrings([cpf, cep, logadouro, numero, complemento, cidade, uf]);
+
     let novoEndereco = new Endereco(cep, logadouro, numero, complemento, cidade, uf);
     (<Cliente> this.Rpessoas.getPessoa(cpf)).adicionarEndereco(novoEndereco);
   }
@@ -53,6 +62,17 @@ export class SPessoa {
 
   public exibirFuncionario(codFuncionario: string) {
     return (<Funcionario> this.Rpessoas.getPessoa(codFuncionario)).toString();
+  }
+
+  private validarStrings(strings: string[]) {
+    strings.forEach((elemento => this.validarString(elemento)));
+  }
+
+  private validarString(string: string) {
+    if (string.trim() === "") {
+      throw new Error("Nenhum dado de entrada pode estar vazio ou em branco");
+      
+    }
   }
 
 }

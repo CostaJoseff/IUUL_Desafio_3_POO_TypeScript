@@ -14,6 +14,7 @@ var SPessoa = /** @class */ (function () {
         this.codFuncionarioDisponivel = 0;
     }
     SPessoa.prototype.cadastrarCliente = function (cpf, nome, telefone, cep, logadouro, numero, complemento, cidade, uf, senha) {
+        this.validarStrings([cpf, nome, telefone, cep, logadouro, numero, complemento, cidade, uf, senha]);
         if (this.Rpessoas.contem(cpf)) {
             throw new Error("CPF já cadastrado");
         }
@@ -22,6 +23,10 @@ var SPessoa = /** @class */ (function () {
         this.Rpessoas.setCliente(novoCliente);
     };
     SPessoa.prototype.cadastrarFuncionario = function (cpf, nome, telefone, cargoNome, salario, senha) {
+        this.validarStrings([cpf, nome, telefone, cargoNome, senha]);
+        if (salario <= 0) {
+            throw new Error("Salário não pode ser <= 0");
+        }
         if (this.Rpessoas.contemFuncionario(cpf)) {
             throw new Error("Funcionário já cadastrado");
         }
@@ -34,6 +39,7 @@ var SPessoa = /** @class */ (function () {
         return novoFuncionario.getCodFuncionario();
     };
     SPessoa.prototype.adicionarEndereco = function (cpf, cep, logadouro, numero, complemento, cidade, uf) {
+        this.validarStrings([cpf, cep, logadouro, numero, complemento, cidade, uf]);
         var novoEndereco = new Endereco_1.Endereco(cep, logadouro, numero, complemento, cidade, uf);
         this.Rpessoas.getPessoa(cpf).adicionarEndereco(novoEndereco);
     };
@@ -42,6 +48,15 @@ var SPessoa = /** @class */ (function () {
     };
     SPessoa.prototype.exibirFuncionario = function (codFuncionario) {
         return this.Rpessoas.getPessoa(codFuncionario).toString();
+    };
+    SPessoa.prototype.validarStrings = function (strings) {
+        var _this = this;
+        strings.forEach((function (elemento) { return _this.validarString(elemento); }));
+    };
+    SPessoa.prototype.validarString = function (string) {
+        if (string.trim() === "") {
+            throw new Error("Nenhum dado de entrada pode estar vazio ou em branco");
+        }
     };
     return SPessoa;
 }());
