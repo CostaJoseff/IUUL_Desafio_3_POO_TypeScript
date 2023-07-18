@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.chamadas = void 0;
 var Banco_1 = require("../src/Banco");
 var banco;
 function init() {
@@ -59,4 +60,5 @@ function chamadas() {
     adicionarEndereco();
     console.log("-------------------------");
 }
+exports.chamadas = chamadas;
 chamadas();

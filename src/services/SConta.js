@@ -39,18 +39,28 @@ var SConta = /** @class */ (function () {
         contaDestino === null || contaDestino === void 0 ? void 0 : contaDestino.depositar(valor);
     };
     SConta.prototype.sacar = function (valor, numero) {
-        var _a;
         if (valor < 0) {
             throw new Error("Valor de deposito não pode ser negativo.");
         }
-        (_a = this.contas.getConta(numero)) === null || _a === void 0 ? void 0 : _a.sacar(valor);
+        var conta = this.contas.getConta(numero);
+        if (conta === undefined) {
+            throw new Error("Conta não existe.");
+        }
+        conta === null || conta === void 0 ? void 0 : conta.sacar(valor);
     };
     SConta.prototype.transferir = function (contaOrigem, contaDestino, valor) {
-        var _a;
         if (valor < 0) {
             throw new Error("O valor de transferência não pode ser negativo.");
         }
-        (_a = this.contas.getConta(contaOrigem)) === null || _a === void 0 ? void 0 : _a.transferir(this.contas.getConta(contaDestino), valor);
+        var origem = this.contas.getConta(contaOrigem);
+        if (origem === undefined) {
+            throw new Error("Conta origem não existe.");
+        }
+        var destino = this.contas.getConta(contaDestino);
+        if (destino === undefined) {
+            throw new Error("Conta destino não existe.");
+        }
+        origem === null || origem === void 0 ? void 0 : origem.transferir(destino, valor);
     };
     SConta.prototype.exibirConta = function (numero) {
         var _a;

@@ -53,7 +53,12 @@ export class SConta {
     if (valor < 0) {
       throw new Error("Valor de deposito não pode ser negativo.");
     }
-    this.contas.getConta(numero)?.sacar(valor);
+    const conta = this.contas.getConta(numero);
+    if (conta === undefined) {
+      throw new Error("Conta não existe.");
+    }
+
+    conta?.sacar(valor);
   }
 
   public transferir(contaOrigem: string, contaDestino: string, valor: number) {
@@ -61,7 +66,17 @@ export class SConta {
       throw new Error("O valor de transferência não pode ser negativo.");
     }
 
-    (<ContaCorrente> this.contas.getConta(contaOrigem))?.transferir(<AConta> this.contas.getConta(contaDestino), valor);
+    const origem = (<ContaCorrente> this.contas.getConta(contaOrigem));
+    if (origem === undefined) {
+      throw new Error("Conta origem não existe.");
+    }
+
+    const destino = <AConta> this.contas.getConta(contaDestino);
+    if (destino === undefined) {
+      throw new Error("Conta destino não existe.");
+    }
+
+    origem?.transferir(destino, valor);
   }
 
   public exibirConta(numero: string) {

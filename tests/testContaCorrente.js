@@ -10,6 +10,14 @@ function init2() {
     banco = new Banco_1.Banco();
     return banco.criarContaCorrente(10, "111");
 }
+function init3() {
+    banco = new Banco_1.Banco();
+    var contaOrigem = banco.criarContaCorrente(10, "111");
+    var contaDestino = banco.criarContaPoupanca("111");
+    banco.depositar(100, contaOrigem);
+    banco.depositar(100, contaDestino);
+    return [contaOrigem, contaDestino];
+}
 function criarCC() {
     init();
     try {
@@ -61,11 +69,70 @@ function depositoCC() {
         return;
     }
 }
+function saqueCC() {
+    var numeroDaConta = init2();
+    try {
+        banco.sacar(500, "asdasd");
+        console.log("Teste saque conta inexistente: X");
+    }
+    catch (error) { }
+    try {
+        banco.sacar(-500, numeroDaConta);
+        console.log("Teste saque saldo negativo: X");
+    }
+    catch (error) { }
+    banco.depositar(500, numeroDaConta);
+    banco.sacar(250, numeroDaConta);
+    var saldo = banco.obterSaldo(numeroDaConta);
+    if (saldo !== 250) {
+        console.log("Teste saque saldo 250: X");
+        return;
+    }
+    banco.sacar(200, numeroDaConta);
+    saldo = banco.obterSaldo(numeroDaConta);
+    if (saldo !== 50) {
+        console.log("Teste saque saldo 50: X");
+        return;
+    }
+    banco.sacar(60, numeroDaConta);
+    saldo = banco.obterSaldo(numeroDaConta);
+    if (saldo !== -10) {
+        console.log("Teste saque saldo -10: X");
+        return;
+    }
+    try {
+        banco.sacar(60, numeroDaConta);
+        console.log("Teste saque saldo no limite: X");
+    }
+    catch (error) { }
+}
+function transferenciaCC() {
+    var contas = init3();
+    var contaOrigem = contas[0];
+    var contaDestino = contas[1];
+    try {
+        banco.transferir("ffffffff", contaDestino, 10);
+        console.log("Teste transferir conta origem inexistente: X");
+    }
+    catch (error) { }
+    try {
+        banco.transferir(contaOrigem, "ffffffff", 10);
+        console.log("Teste transferir conta destino inexistente: X");
+    }
+    catch (error) { }
+    try {
+        banco.transferir(contaOrigem, contaDestino, -10);
+        console.log("Teste transferir valor negativo: X");
+    }
+    catch (error) { }
+}
 function chamadas() {
     console.log("Teste ContaCorrente");
     console.log("-------------------------");
     criarCC();
     depositoCC();
+    saqueCC();
+    transferenciaCC();
     console.log("-------------------------");
 }
 chamadas();

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.chamadas = void 0;
 var Banco_1 = require("../src/Banco");
 function cadastrarFuncionario() {
     try {
@@ -108,4 +109,5 @@ function chamadas() {
     cadastrarCliente();
     console.log("-------------------------");
 }
+exports.chamadas = chamadas;
 chamadas();
