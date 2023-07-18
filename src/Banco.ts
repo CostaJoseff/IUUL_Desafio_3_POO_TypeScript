@@ -53,4 +53,8 @@ export class Banco {
   public transferir(contaOrigem: string, contaDestino: string, valor: number) {
     this.sConta.transferir(contaOrigem, contaDestino, valor);
   }
+
+  public obterSaldo(numero: string) {
+    return this.sConta.calcularSaldo(numero);
+  }
 }

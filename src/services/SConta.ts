@@ -13,6 +13,10 @@ export class SConta {
   }
 
   public criarContaCorrente(limite: number, proprietario: string) {
+    if (limite < 0) {
+      throw new Error("O limite não pode ser negativo.");
+    }
+
     let contaCorrente = new ContaCorrente(`${this.numeroDeContaDisponivel}`, limite, proprietario);
     this.contas.setConta(contaCorrente);
     this.numeroDeContaDisponivel++;
@@ -33,15 +37,31 @@ export class SConta {
   }
 
   public depositar(valor: number, numero: string) {
-    this.contas.getConta(numero)?.depositar(valor);
+    if (valor < 0) {
+      throw new Error("Valor de deposito não pode ser negativo.");
+    }
+    const contaDestino = this.contas.getConta(numero);
+    if (contaDestino === undefined) {
+      throw new Error("Conta não existe.");
+      
+    }
+
+    contaDestino?.depositar(valor);
   }
 
   public sacar(valor: number, numero: string) {
+    if (valor < 0) {
+      throw new Error("Valor de deposito não pode ser negativo.");
+    }
     this.contas.getConta(numero)?.sacar(valor);
   }
 
   public transferir(contaOrigem: string, contaDestino: string, valor: number) {
-  (<ContaCorrente> this.contas.getConta(contaOrigem))?.transferir(<AConta> this.contas.getConta(contaDestino), valor);
+    if (valor < 0) {
+      throw new Error("O valor de transferência não pode ser negativo.");
+    }
+
+    (<ContaCorrente> this.contas.getConta(contaOrigem))?.transferir(<AConta> this.contas.getConta(contaDestino), valor);
   }
 
   public exibirConta(numero: string) {

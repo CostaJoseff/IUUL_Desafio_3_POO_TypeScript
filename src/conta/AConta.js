@@ -16,9 +16,6 @@ var AConta = /** @class */ (function () {
         this.saldo += valor;
     };
     AConta.prototype.sacar = function (valor) {
-        if (this.saldo < valor) {
-            throw new Error("Saldo insuficiente");
-        }
         this.saques.push(new Debito_js_1.Debito(valor, new Date()));
         this.saldo -= valor;
     };

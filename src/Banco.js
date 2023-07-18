@@ -41,6 +41,9 @@ var Banco = /** @class */ (function () {
     Banco.prototype.transferir = function (contaOrigem, contaDestino, valor) {
         this.sConta.transferir(contaOrigem, contaDestino, valor);
     };
+    Banco.prototype.obterSaldo = function (numero) {
+        return this.sConta.calcularSaldo(numero);
+    };
     return Banco;
 }());
 exports.Banco = Banco;

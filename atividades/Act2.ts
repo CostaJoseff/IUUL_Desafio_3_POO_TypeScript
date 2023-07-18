@@ -1,5 +1,4 @@
 import { Banco } from "../src/Banco";
-import { Endereco } from "../src/pessoa/Endereco";
 
 let banco = new Banco();
 banco.cadastrarCliente("333", "Cliente Azul", "3321", "405504", "ali", "0", "nenhum", "aquela", "ZZ", "eusoulegal");

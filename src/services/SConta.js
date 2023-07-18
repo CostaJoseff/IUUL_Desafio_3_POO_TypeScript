@@ -10,6 +10,9 @@ var SConta = /** @class */ (function () {
         this.contas = new RContas_1.RContas();
     }
     SConta.prototype.criarContaCorrente = function (limite, proprietario) {
+        if (limite < 0) {
+            throw new Error("O limite não pode ser negativo.");
+        }
         var contaCorrente = new ContaCorrente_1.ContaCorrente("".concat(this.numeroDeContaDisponivel), limite, proprietario);
         this.contas.setConta(contaCorrente);
         this.numeroDeContaDisponivel++;
@@ -26,15 +29,27 @@ var SConta = /** @class */ (function () {
         return (_a = this.contas.getConta(numero)) === null || _a === void 0 ? void 0 : _a.calcularSaldo();
     };
     SConta.prototype.depositar = function (valor, numero) {
-        var _a;
-        (_a = this.contas.getConta(numero)) === null || _a === void 0 ? void 0 : _a.depositar(valor);
+        if (valor < 0) {
+            throw new Error("Valor de deposito não pode ser negativo.");
+        }
+        var contaDestino = this.contas.getConta(numero);
+        if (contaDestino === undefined) {
+            throw new Error("Conta não existe.");
+        }
+        contaDestino === null || contaDestino === void 0 ? void 0 : contaDestino.depositar(valor);
     };
     SConta.prototype.sacar = function (valor, numero) {
         var _a;
+        if (valor < 0) {
+            throw new Error("Valor de deposito não pode ser negativo.");
+        }
         (_a = this.contas.getConta(numero)) === null || _a === void 0 ? void 0 : _a.sacar(valor);
     };
     SConta.prototype.transferir = function (contaOrigem, contaDestino, valor) {
         var _a;
+        if (valor < 0) {
+            throw new Error("O valor de transferência não pode ser negativo.");
+        }
         (_a = this.contas.getConta(contaOrigem)) === null || _a === void 0 ? void 0 : _a.transferir(this.contas.getConta(contaDestino), valor);
     };
     SConta.prototype.exibirConta = function (numero) {

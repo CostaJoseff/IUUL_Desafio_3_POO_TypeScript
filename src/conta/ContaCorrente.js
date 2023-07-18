@@ -25,10 +25,16 @@ var ContaCorrente = /** @class */ (function (_super) {
         return _this;
     }
     ContaCorrente.prototype.calcularSaldo = function () {
-        return _super.prototype.calcularSaldo.call(this) + this.limite;
+        return _super.prototype.calcularSaldo.call(this);
+    };
+    ContaCorrente.prototype.sacar = function (valor) {
+        if ((this.calcularSaldo() - valor) < -this.limite) {
+            throw new Error("Saldo insuficiente");
+        }
+        _super.prototype.sacar.call(this, valor);
     };
     ContaCorrente.prototype.transferir = function (contaDestino, valor) {
-        if (this.calcularSaldo() < valor) {
+        if ((this.calcularSaldo() - valor) < -this.limite) {
             throw new Error("Saldo insuficiente");
         }
         _super.prototype.sacar.call(this, valor);

@@ -9,17 +9,23 @@ export class ContaCorrente extends AConta{
   }
 
   public calcularSaldo() {
-    return super.calcularSaldo() + this.limite;
+    return super.calcularSaldo();
+  }
+
+  public sacar(valor: number) {
+    if ((this.calcularSaldo() - valor) < -this.limite) {
+      throw new Error("Saldo insuficiente");
+    }
+    super.sacar(valor);
   }
 
   public transferir(contaDestino: AConta, valor: number) {
-    if (this.calcularSaldo() < valor) {
+    if ((this.calcularSaldo() - valor) < -this.limite) {
       throw new Error("Saldo insuficiente");
     }
 
     super.sacar(valor);
     contaDestino.depositar(valor);
-
   }
 
   public getClass() {

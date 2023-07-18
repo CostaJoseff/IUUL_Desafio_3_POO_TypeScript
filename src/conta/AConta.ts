@@ -18,14 +18,11 @@ export abstract class AConta {
 
   public depositar(valor: number) {
     this.depositos.push(new Credito(valor, new Date()));
+    
     this.saldo += valor;
   }
 
   public sacar(valor: number) {
-    if (this.saldo < valor) {
-      throw new Error("Saldo insuficiente");
-      
-    }
     this.saques.push(new Debito(valor, new Date()));
     this.saldo -= valor;
   }
