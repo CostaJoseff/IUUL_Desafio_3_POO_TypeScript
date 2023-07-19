@@ -21,12 +21,19 @@ function init3() {
 function criarCC() {
     init();
     try {
+        banco.criarContaCorrente(10, "  ");
+        console.log("Teste criar CC string vazia: X");
+    }
+    catch (error) { }
+    try {
         banco.criarContaCorrente(10, "abc");
     }
     catch (erro) {
         console.log("Teste criar CC proprietario inexistente: X");
     }
     try {
+        banco.criarContaCorrente(10, "abc");
+        banco.criarContaCorrente(10, "abc");
         banco.criarContaCorrente(10, "abc");
     }
     catch (erro) {
@@ -129,8 +136,8 @@ function transferenciaCC() {
     var saldoOrigem = banco.obterSaldo(contaOrigem);
     var saldoDestino = banco.obterSaldo(contaDestino);
     if (saldoOrigem !== 90 || saldoDestino !== 110) {
-        console.log("Origem ".concat(saldoOrigem, "\nDestino ").concat(saldoDestino));
-        throw new Error("Teste transferir origem: 90, destino: 110: X");
+        console.log("Teste transferir origem: 90, destino: 110: X");
+        return;
     }
     try {
         banco.transferir(contaOrigem, contaDestino, 110);
@@ -141,8 +148,8 @@ function transferenciaCC() {
     saldoOrigem = banco.obterSaldo(contaOrigem);
     saldoDestino = banco.obterSaldo(contaDestino);
     if (saldoOrigem !== -10 || saldoDestino !== 210) {
-        console.log("Origem ".concat(saldoOrigem, "\nDestino ").concat(saldoDestino));
-        throw new Error("Teste transferir origem: 90, destino: 110: X");
+        console.log("Teste transferir origem: 90, destino: 110: X");
+        return;
     }
 }
 function chamadas() {
