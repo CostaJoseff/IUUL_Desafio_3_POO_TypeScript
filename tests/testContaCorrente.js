@@ -125,6 +125,25 @@ function transferenciaCC() {
         console.log("Teste transferir valor negativo: X");
     }
     catch (error) { }
+    banco.transferir(contaOrigem, contaDestino, 10);
+    var saldoOrigem = banco.obterSaldo(contaOrigem);
+    var saldoDestino = banco.obterSaldo(contaDestino);
+    if (saldoOrigem !== 90 || saldoDestino !== 110) {
+        console.log("Origem ".concat(saldoOrigem, "\nDestino ").concat(saldoDestino));
+        throw new Error("Teste transferir origem: 90, destino: 110: X");
+    }
+    try {
+        banco.transferir(contaOrigem, contaDestino, 110);
+        console.log("Teste transferir saldo insuficiente: X");
+    }
+    catch (error) { }
+    banco.transferir(contaOrigem, contaDestino, 100);
+    saldoOrigem = banco.obterSaldo(contaOrigem);
+    saldoDestino = banco.obterSaldo(contaDestino);
+    if (saldoOrigem !== -10 || saldoDestino !== 210) {
+        console.log("Origem ".concat(saldoOrigem, "\nDestino ").concat(saldoDestino));
+        throw new Error("Teste transferir origem: 90, destino: 110: X");
+    }
 }
 function chamadas() {
     console.log("Teste ContaCorrente");
